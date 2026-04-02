@@ -152,3 +152,149 @@ Features & Functionality
 Technical Implementation
 
 
+
+
+now i chose the final ps i'm here now
+
+
+rohanunbeg0918@gmail.com
+
+
+Dashboard
+
+Timeline
+
+Hackathon Challenge
+GUVI Hackathon 2026 - Intern Hiring
+GUVI Hackathon 2026 challenges developers to build production-quality applications over an intensive sprint. Participants choose one of three engineering tracks and deliver a fully functional, hosted solution. Each track is scored out of 100 points with optional bonus points available.
+
+Challenge Levels
+Complete each level to advance in the hackathon
+
+50%
+Level 1 - Problem Statement Selection
+
+Qualified
+
+
+This is the first step of your hackathon journey, where you will explore and select a problem statement to work on. The hackathon is designed to encourage participants to solve real-world challenges by building innovative, practical, and scalable solutions using technology.
+
+Rules
+
+Only one problem statement can be selected.
+Custom or alternate problem statements are not allowed.
+Once selected, the problem statement cannot be changed later.
+Make sure to select your problem statement within the given time window. The selection portal will open at the specified start time and will close when the deadline is reached.
+If you do not select a problem statement before the deadline, you will not be allowed to proceed to the next stage of the hackathon.
+Starts at:
+01 Apr 2026, 10:00:00 AM
+
+Ends at:
+04 Apr 2026, 11:59:00 PM
+
+View Problem Details
+🎉   Congratulations! Your solution has been accepted, and you are now qualified for the next round. Well done!
+
+AI-Powered Document Analysis & Extraction – API Endpoint Tester
+
+Active
+
+
+This endpoint tester allows participants to validate their API for the AI-Powered Document Analysis & Extraction. Participants can test authentication, request handling, document analyzing & extraction, and response structure by sending apikey to their deployed API endpoint before final evaluation. The request data will be sent from our side.
+
+How to Use the Endpoint Tester
+
+This tool helps participants verify that their API endpoint is working as expected for the AI-Powered Document Analysis & Extraction problem.
+
+Steps:
+
+Enter your deployed API endpoint URL
+Provide the required Authorization / API key in the header
+Click Test Endpoint to send the request
+What This Tests:
+
+API authentication using headers
+Ability to receive and process pdf/docx/image input
+Correct request parsing and validation
+Proper JSON response formatting
+API stability and response behavior
+Reference Document: AI-Powered Document Analysis & Extraction
+
+
+Note: This tester is for validation purposes only. The final evaluation will use a separate automated system with official pdf/docx/image samples.
+
+Test Endpoint
+Call Compliance – API Endpoint Tester
+
+Active
+
+
+This endpoint tester allows participants to validate their API for the Call Center Compliance problem. Participants can test authentication, request handling, audio input processing, and response structure by sending a sample voice input to their deployed API endpoint before final evaluation. The request data will be sent from our side.
+
+How to Use the Endpoint Tester
+
+This tool helps participants verify that their API endpoint is working as expected for the Call Center Compliance problem.
+
+Steps:
+
+Enter your deployed API endpoint URL
+Provide the required Authorization / API key in the header
+Click Test Endpoint to send the request
+What This Tests:
+
+API authentication using headers
+Ability to receive and process audio input
+Correct request parsing and validation
+Proper JSON response formatting
+API stability and response behavior
+Reference Document: Call Center Compliance
+
+
+Note: This tester is for validation purposes only. The final evaluation will use a separate automated system with official voice samples.
+
+Test Endpoint
+Level 2 - Form Submission
+
+Active
+
+
+Participants must submit the live link of the deployed application and the link of github repository. A short video of project demonstration for Real-time Collaborative Text Editor Problem. The api key for AI-Powered Document Analysis & Extraction and Call Center Compliance. Your submission must be based on the same problem statement you selected in the first phase. Submissions based on a different problem will not be considered.
+
+Submission Requirements
+
+Live deployed URL (must be publicly accessible)
+GitHub repository link
+YouTube or Google Drive demo video link (must be public)
+AI Tools Used Documentation Required if applicable — Document all AI tools (ChatGPT, Claude, Copilot, etc.)
+Presentation Deck Optional — Slides summarising architecture, challenges, and outcomes
+Submission Format Details
+
+Video Demo 2–5 minutes
+
+Screen recording with audio narration
+Formats: YouTube link / Google Drive link
+Must demonstrate all key features
+GitHub Repo Public repository
+
+Must include a detailed README.md with: setup instructions, architecture overview, tech stack, AI tools used (if any), known limitations
+Live URL
+
+Application must be live at submission time and remain accessible for 48 hours after the deadline for judge evaluation
+Free tiers of Vercel, Render, Railway, Fly.io, or AWS Free Tier are acceptable
+AI Tool Policy
+
+You MUST list every AI tool in your README under section 'AI Tools Used'
+Failure to disclose AI assistance may result in point deductions or disqualification
+Overview — Scoring Summary
+
+Code Quality & Structure (25 Points) - Clean, readable, well-structured code with meaningful commit history
+Features & Functionality (30 Points) - All required features implemented and working correctly
+Technical Implementation (25 Points) - Correct use of specified technologies and architecture
+User Experience & Design (20 Points) - Polished UI, responsive design, intuitive navigation
+Starts at:
+01 Apr 2026, 10:00:00 AM
+
+Ends at:
+04 Apr 2026, 11:59:00 PM
+
+Submit Solution
