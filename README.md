@@ -8,14 +8,14 @@ DocIntel is designed as a **production-grade analysis engine**. Unlike basic wra
 1.  **Structural Ingestion**: Uses `PyMuPDF` and `python-docx` for layout-preserving text extraction.
 2.  **OCR Intelligence**: Tesseract 5.0 base with grayscale/contrast pre-processing for high-accuracy image recognition.
 3.  **Semantic Analysis**: Powered by **Gemini 2.5 Flash** for ultra-fast intent and entity mapping.
-4.  **Distributed Processing**: Integrated with **Celery and Redis** for asynchronous scalability.
+4.  **Scale-Ready Architecture**: Supports **FastAPI BackgroundTasks** for free-tier deployment, with built-in hooks for **Celery/Redis** orchestration in high-volume environments.
 
 ## // Tech Stack
 
 - **Backend**: FastAPI (Python 3.11+)
 - **Core Engine**: Tesseract OCR, PyMuPDF, python-docx
 - **Intelligence**: Google Gemini 2.0/2.5 Flash
-- **Task Queue**: Celery + Redis
+- **Task Queue**: FastAPI BackgroundTasks (Free-Tier) / Celery + Redis (Scale-up)
 - **Containerization**: Docker + Docker Compose
 - **Design**: Premium Dark-Mode Workspace (Vanilla HTML/CSS/JS)
 

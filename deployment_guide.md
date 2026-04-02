@@ -17,10 +17,11 @@ git push origin main
 2. Connect your GitHub repository (`hcl-hackathon`).
 3. **Name**: `docintel-api` (or any name you like)
 4. **Runtime**: `Python 3`
-5. **Build Command**: `pip install -r requirements.txt`
+5. **Build Command**: `pip install --upgrade pip && pip install -r requirements.txt`
 6. **Start Command**: `uvicorn src.main:app --host 0.0.0.0 --port $PORT`
 7. **Instance Type**: Select **Free** ($0/month).
 8. **Environment Variables** (Click Advanced):
+   - `PYTHON_VERSION`: `3.10.16` (CRITICAL: Prevents build errors on Render)
    - `GEMINI_API_KEY`: Your Google Gemini key.
    - `API_KEY`: `sk_track2_987654321` (this is the key the GUVI tester will use).
 
