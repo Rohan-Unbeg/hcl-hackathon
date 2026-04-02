@@ -20,17 +20,17 @@ API_KEY = "sk_track2_987654321"
 
 SAMPLE_FILES = [
     {
-        "path": "samplefilestotest-provided/sample1-Technology Industry Analysis.pdf",
+        "path": "samples/sample1-Technology Industry Analysis.pdf",
         "fileName": "sample1-Technology Industry Analysis.pdf",
         "fileType": "pdf",
     },
     {
-        "path": "samplefilestotest-provided/sample2-Cybersecurity Incident Report.docx",
+        "path": "samples/sample2-Cybersecurity Incident Report.docx",
         "fileName": "sample2-Cybersecurity Incident Report.docx",
         "fileType": "docx",
     },
     {
-        "path": "samplefilestotest-provided/sample3.jpg",
+        "path": "samples/sample3.jpg",
         "fileName": "sample3.jpg",
         "fileType": "image",
     },
