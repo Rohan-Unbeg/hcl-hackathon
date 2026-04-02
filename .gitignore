@@ -1,0 +1,27 @@
+# Virtual Environment
+venv/
+.venv/
+env/
+.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Data/Temporary
+tmp/
+results/
+samplefilestotest-provided/ (Optional: excluding provided samples if repo should be clean)

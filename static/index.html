@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocIntel // Deep Extraction Engine</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="theme-dark">
+    <div class="workspace">
+        <header class="workspace-header">
+            <div class="brand">
+                <span class="brand-glyph">//</span>
+                <span class="brand-name">DocIntel</span>
+                <span class="brand-tag">v2.1_PROD</span>
+            </div>
+            <div class="system-stats">
+                <div class="stat-item">
+                    <span class="label">ENGINE:</span>
+                    <span class="value">GEMINI_2.5_FLASH</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="label">LATENCY:</span>
+                    <span id="latencyValue" class="value">--ms</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="workspace-content">
+            <div class="analysis-grid">
+                <!-- Left: Control & Upload -->
+                <div class="control-panel">
+                    <div class="panel-section">
+                        <h3 class="section-title">INGESTION_ZONE</h3>
+                        <div class="drop-zone" id="dropZone">
+                            <input type="file" id="fileInput" hidden accept=".pdf,.docx,.jpg,.jpeg,.png">
+                            <div class="drop-zone-overlay"></div>
+                            <div class="drop-zone-content">
+                                <span class="upload-glyph">⤓</span>
+                                <p class="primary-msg">DROP_FILE_HERE</p>
+                                <p class="secondary-msg">PDF, DOCX, IMG (MAX 10MB)</p>
+                                <button class="browse-btn">SELECT_LOCAL_FILE</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="activeFileSection" class="panel-section hidden">
+                        <h3 class="section-title">ACTIVE_DOCUMENT</h3>
+                        <div class="file-card">
+                            <div class="file-card-icon"><i class="fas fa-file-alt"></i></div>
+                            <div class="file-card-info">
+                                <span id="activeFileName" class="file-name">filename.pdf</span>
+                                <span id="activeFileType" class="file-type">PDF_DOCUMENT</span>
+                            </div>
+                        </div>
+                        <div id="processingIndicator" class="processing-bar hidden">
+                            <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
+                            <span id="statusLabel" class="status-label">INITIALIZING...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Analysis Output -->
+                <div class="output-panel">
+                    <div id="welcomeState" class="empty-state">
+                        <div class="empty-glyph">0101</div>
+                        <h2>WAITING_FOR_INPUT</h2>
+                        <p>Upload a document to begin structural extraction and intent analysis.</p>
+                    </div>
+
+                    <div id="resultsContent" class="results-layout hidden">
+                        <div class="results-header">
+                            <div class="header-left">
+                                <h1 class="doc-title">ANALYSIS_REPORT</h1>
+                                <p id="reportTimestamp" class="timestamp"></p>
+                            </div>
+                            <div class="header-right">
+                                <span id="sentimentTag" class="sentiment-tag">NEUTRAL</span>
+                            </div>
+                        </div>
+
+                        <div class="results-scroll-area">
+                            <section class="result-block">
+                                <h3 class="block-title">EXTRACTED_SUMMARY</h3>
+                                <div class="summary-box">
+                                    <p id="summaryText">Summary loading...</p>
+                                </div>
+                            </section>
+
+                            <section class="result-block">
+                                <h3 class="block-title">ENTITY_MAP</h3>
+                                <div class="entities-container">
+                                    <div class="entity-col">
+                                        <label>NAMES</label>
+                                        <div id="namesList" class="tag-cloud"></div>
+                                    </div>
+                                    <div class="entity-col">
+                                        <label>ORGANIZATIONS</label>
+                                        <div id="orgsList" class="tag-cloud"></div>
+                                    </div>
+                                    <div class="entity-col">
+                                        <label>DATES</label>
+                                        <div id="datesList" class="tag-cloud"></div>
+                                    </div>
+                                    <div class="entity-col">
+                                        <label>CURRENCY_VALUES</label>
+                                        <div id="amountsList" class="tag-cloud"></div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="result-block">
+                                <h3 class="block-title">RAW_STRUCTURED_DATA</h3>
+                                <div class="json-wrapper">
+                                    <pre id="rawJson"></pre>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="workspace-footer">
+            <div class="footer-left">
+                <span class="auth-status"><i class="fas fa-lock"></i> API_KEY_VERIFIED</span>
+            </div>
+            <div class="footer-center">TRACK_2 // HCL_HACKATHON_2026</div>
+            <div class="footer-right">
+                <span class="version">BUILD_ID: 1042-PROD</span>
+            </div>
+        </footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
