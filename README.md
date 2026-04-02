@@ -19,6 +19,24 @@ DocIntel is designed as a **production-grade analysis engine**. Unlike basic wra
 - **Containerization**: Docker + Docker Compose
 - **Design**: Premium Dark-Mode Workspace (Vanilla HTML/CSS/JS)
 
+## // Architecture Overview
+
+DocIntel follows a **Decoupled Processing Architecture**:
+- **Ingestion Layer**: High-availability FastAPI server handles request validation and authentication.
+- **Worker Layer**: Celery workers manage the computational load of OCR and AI processing, ensuring the API remains responsive.
+- **Intelligence Layer**: Modular interface to Gemini 2.5 Flash, allowing for rapid iteration of prompts without touching core extraction code.
+
+## // AI Tools Used
+
+In compliance with HCL Hackathon rules, the following AI assistance was utilized:
+- **Antigravity (Google DeepMind)**: Used for rapid prototyping, project architecture design, and UI component building.
+- **Google Gemini 2.0/2.5 Flash**: The core LLM engine used for document parsing, entity extraction, and sentiment classification.
+
+## // Known Limitations
+- **File Size**: Currently optimized for files under 10MB to maintain low latency.
+- **Handwriting**: OCR accuracy may vary for cursive handwriting; best results with printed text.
+- **Language**: Primary optimization for English; multi-language support is on the roadmap.
+
 ## // Deployment
 
 ### Option A: Manual Setup (Local)
