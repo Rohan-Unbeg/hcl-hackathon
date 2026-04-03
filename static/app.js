@@ -59,10 +59,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const base64 = await toBase64(file);
-            updateProgress(30, 'PHASE_1: EXTRACTING_LAYERS');
+            
+            // Type-Aware Progress Tuning
+            const isImage = fileType === 'image';
+            let currentProgress = isImage ? 30 : 65; // Skip ahead for fast formats
+            const tickerSpeed = isImage ? 1500 : 400; // Faster feedback for PDF/DOCX
+            
+            updateProgress(currentProgress, isImage ? 'PHASE_1: OCR_INITIALIZING' : 'PHASE_1: STRUCTURAL_PARSING');
 
             // Start Status Ticker for the long fetch
-            const statusMessages = [
+            const statusMessages = isImage ? [
                 'PHASE_1: SCANNING_STRUCTURE',
                 'PHASE_1: OCR_RECOGNITION',
                 'PHASE_2: ALIGNING_ENTITIES',
@@ -70,18 +76,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 'PHASE_2: GEMINI_BRAIN_V2.5_ACTIVE',
                 'PHASE_2: SUMMARIZING_CONTENT',
                 'HEURISTICS: CALCULATING_SENTIMENT'
+            ] : [
+                'PHASE_1: PARSING_PDF_LAYERS',
+                'PHASE_2: SEMANTIC_MAPPING',
+                'PHASE_2: GENERATING_INSIGHTS',
+                'FINISHING_UP...'
             ];
-            let msgIndex = 0;
-            let currentProgress = 30;
             
+            let msgIndex = 0;
             tickerInterval = setInterval(() => {
-                if (currentProgress < 90) {
+                if (currentProgress < 95) {
                     currentProgress += 1;
                     const label = statusMessages[msgIndex % statusMessages.length];
                     updateProgress(currentProgress, label);
-                    if (currentProgress % 10 === 0) msgIndex++;
+                    if (currentProgress % 8 === 0) msgIndex++;
                 }
-            }, 1200); // Pulse every 1.2s to show life
+            }, tickerSpeed);
 
             const response = await fetch('/api/document-analyze', {
                 method: 'POST',
@@ -93,10 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             });
 
-            clearInterval(tickerInterval);
+            if (tickerInterval) clearInterval(tickerInterval);
 
             if (!response.ok) throw new Error('API_PROCESS_FAILED');
-
             const data = await response.json();
             
             const endTime = performance.now();
