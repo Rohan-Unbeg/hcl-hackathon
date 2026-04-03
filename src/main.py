@@ -48,7 +48,15 @@ async def health_check():
 
 
 # Static Dashboard (UI)
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Since main.py is in src/, the static folder is one level up in the root
+static_path = os.path.join(os.path.dirname(BASE_DIR), "static")
+
+logger.info(f"Mounting static files from: {static_path}")
+if not os.path.exists(static_path):
+    logger.error(f"Static directory NOT FOUND: {static_path}")
+else:
+    app.mount("/", StaticFiles(directory=static_path, html=True), name="static")
 
 if __name__ == "__main__":
     import uvicorn
