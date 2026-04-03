@@ -73,6 +73,21 @@
                         <p>Upload a document to begin structural extraction and intent analysis.</p>
                     </div>
 
+                    <!-- Processing State (Center Panel) -->
+                    <div id="processingState" class="empty-state hidden">
+                        <div class="processing-spinner">
+                            <div class="spinner-ring"></div>
+                            <div class="spinner-core">AI</div>
+                        </div>
+                        <h2 id="centerStatusTitle">ANALYZING_DOCUMENT</h2>
+                        <p id="centerStatusDetail">Phasing through layers...</p>
+                        <div class="processing-stepper">
+                            <div id="step1" class="step">1. EXTRACTION</div>
+                            <div class="step-line"></div>
+                            <div id="step2" class="step">2. ANALYSIS</div>
+                        </div>
+                    </div>
+
                     <div id="resultsContent" class="results-layout hidden">
                         <div class="results-header">
                             <div class="header-left">

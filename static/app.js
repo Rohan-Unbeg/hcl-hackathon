@@ -44,54 +44,63 @@ document.addEventListener('DOMContentLoaded', () => {
         const fileType = types[file.type];
         if (!fileType) return alert('ERR: UNSUPPORTED_FILE_TYPE');
 
-        // Update UI to "Active" state
+        // Stage 1: Sidebar File Ingestion
         document.getElementById('activeFileName').innerText = file.name;
         document.getElementById('activeFileType').innerText = `${fileType.toUpperCase()}_DOCUMENT`;
         activeFileSection.classList.remove('hidden');
         processingIndicator.classList.remove('hidden');
         welcomeState.classList.add('hidden');
         resultsContent.classList.add('hidden');
-        
-        updateProgress(10, 'PHASE_1: READING_BYTES');
+        const processingState = document.getElementById('processingState');
+        processingState.classList.add('hidden');
 
+        updateProgress(0, 'INGESTING_FILE');
         const startTime = performance.now();
         let tickerInterval;
 
         try {
+            // Speed through sidebar progress to show "Upload Done"
+            updateProgress(40, 'READING_BYTES');
             const base64 = await toBase64(file);
+            updateProgress(100, 'UPLOAD_COMPLETE');
             
-            // Type-Aware Progress Tuning
+            // Stage 2: Center Panel Deep Processing
+            setTimeout(() => processingIndicator.classList.add('hidden'), 500);
+            processingState.classList.remove('hidden');
+            
             const isImage = fileType === 'image';
-            let currentProgress = isImage ? 30 : 65; // Skip ahead for fast formats
-            const tickerSpeed = isImage ? 1500 : 400; // Faster feedback for PDF/DOCX
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            const centerTitle = document.getElementById('centerStatusTitle');
+            const centerDetail = document.getElementById('centerStatusDetail');
             
-            updateProgress(currentProgress, isImage ? 'PHASE_1: OCR_INITIALIZING' : 'PHASE_1: STRUCTURAL_PARSING');
+            step1.className = 'step active';
+            step2.className = 'step';
+            centerTitle.innerText = isImage ? 'RUNNING_OCR_ENGINE' : 'PARSING_DOCUMENT';
 
-            // Start Status Ticker for the long fetch
             const statusMessages = isImage ? [
-                'PHASE_1: SCANNING_STRUCTURE',
-                'PHASE_1: OCR_RECOGNITION',
-                'PHASE_2: ALIGNING_ENTITIES',
-                'PHASE_2: SEMANTIC_ANALYSIS',
-                'PHASE_2: GEMINI_BRAIN_V2.5_ACTIVE',
-                'PHASE_2: SUMMARIZING_CONTENT',
-                'HEURISTICS: CALCULATING_SENTIMENT'
+                'SCANNING_IMAGE_LAYERS',
+                'EXTRACTING_TEXT_GLYPHS',
+                'OPTIMIZING_CONTRAST',
+                'ALIGNING_COORDINATES',
+                'GEMINI_VISION_READY'
             ] : [
-                'PHASE_1: PARSING_PDF_LAYERS',
-                'PHASE_2: SEMANTIC_MAPPING',
-                'PHASE_2: GENERATING_INSIGHTS',
-                'FINISHING_UP...'
+                'READING_METADATA',
+                'EXTRACTING_TEXT_BLOCKS',
+                'MAP_STRUCTURAL_HIERARCHY',
+                'READY_FOR_AI'
             ];
-            
+
             let msgIndex = 0;
             tickerInterval = setInterval(() => {
-                if (currentProgress < 95) {
-                    currentProgress += 1;
-                    const label = statusMessages[msgIndex % statusMessages.length];
-                    updateProgress(currentProgress, label);
-                    if (currentProgress % 8 === 0) msgIndex++;
+                centerDetail.innerText = statusMessages[msgIndex % statusMessages.length];
+                msgIndex++;
+                if (msgIndex === 3) {
+                    step1.className = 'step done';
+                    step2.className = 'step active';
+                    centerTitle.innerText = 'AI_SEMANTIC_ANALYSIS';
                 }
-            }, tickerSpeed);
+            }, 1800);
 
             const response = await fetch('/api/document-analyze', {
                 method: 'POST',
@@ -111,11 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const endTime = performance.now();
             latencyValue.innerText = `${Math.round(endTime - startTime)}ms`;
 
-            updateProgress(100, 'COMPLETED: REPORT_GENERATED');
-            setTimeout(() => {
-                displayResults(data);
-                processingIndicator.classList.add('hidden');
-            }, 400);
+            processingState.classList.add('hidden');
+            displayResults(data);
 
         } catch (error) {
             if (tickerInterval) clearInterval(tickerInterval);
