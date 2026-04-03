@@ -68,13 +68,21 @@ def _extract_docx(data: bytes) -> str:
 
 
 def _extract_image(data: bytes) -> str:
-    """Performs OCR on images with pre-processing for better accuracy."""
-    img = Image.open(io.BytesIO(data))
-
-    # Pre-processing for OCR accuracy
-    img = ImageOps.grayscale(img)
-    img = ImageOps.autocontrast(img)
-
-    # OCR with high-quality settings
-    text = pytesseract.image_to_string(img, config='--oem 3 --psm 6')
-    return text.strip()
+    """Performs OCR on images with memory-optimized pre-processing."""
+    try:
+        with Image.open(io.BytesIO(data)) as img:
+            # Resize if the image is too large to save memory on 0.1 CPU / 512MB RAM
+            max_size = 2000
+            if max(img.size) > max_size:
+                img.thumbnail((max_size, max_size), Image.Resampling.LANCZOS)
+            
+            # Pre-processing for OCR accuracy
+            img = ImageOps.grayscale(img)
+            img = ImageOps.autocontrast(img)
+            
+            # OCR with high-quality settings
+            text = pytesseract.image_to_string(img, config='--oem 3 --psm 6')
+            return text.strip()
+    except Exception as e:
+        logger.error(f"Image extraction failed: {e}")
+        return "ERROR: Image processing failed during extraction."

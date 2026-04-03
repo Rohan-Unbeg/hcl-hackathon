@@ -95,12 +95,12 @@ document.addEventListener('DOMContentLoaded', () => {
             tickerInterval = setInterval(() => {
                 centerDetail.innerText = statusMessages[msgIndex % statusMessages.length];
                 msgIndex++;
-                if (msgIndex === 3) {
+                if (msgIndex === 2) { // Move to Step 2 earlier
                     step1.className = 'step done';
                     step2.className = 'step active';
                     centerTitle.innerText = 'AI_SEMANTIC_ANALYSIS';
                 }
-            }, 1800);
+            }, isImage ? 1200 : 600); // Dynamic speed based on format
 
             const response = await fetch('/api/document-analyze', {
                 method: 'POST',
@@ -114,12 +114,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (tickerInterval) clearInterval(tickerInterval);
 
-            if (!response.ok) throw new Error('API_PROCESS_FAILED');
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.detail || `API_ERROR_${response.status}`);
+            }
+
             const data = await response.json();
             
             const endTime = performance.now();
             latencyValue.innerText = `${Math.round(endTime - startTime)}ms`;
 
+            // Instant Transition
             processingState.classList.add('hidden');
             displayResults(data);
 
