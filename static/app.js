@@ -51,13 +51,37 @@ document.addEventListener('DOMContentLoaded', () => {
         processingIndicator.classList.remove('hidden');
         welcomeState.classList.add('hidden');
         resultsContent.classList.add('hidden');
-        updateProgress(20, 'READING_BYTES...');
+        
+        updateProgress(10, 'PHASE_1: READING_BYTES');
 
         const startTime = performance.now();
+        let tickerInterval;
 
         try {
             const base64 = await toBase64(file);
-            updateProgress(45, 'EXTRACTING_LAYERS...');
+            updateProgress(30, 'PHASE_1: EXTRACTING_LAYERS');
+
+            // Start Status Ticker for the long fetch
+            const statusMessages = [
+                'PHASE_1: SCANNING_STRUCTURE',
+                'PHASE_1: OCR_RECOGNITION',
+                'PHASE_2: ALIGNING_ENTITIES',
+                'PHASE_2: SEMANTIC_ANALYSIS',
+                'PHASE_2: GEMINI_BRAIN_V2.5_ACTIVE',
+                'PHASE_2: SUMMARIZING_CONTENT',
+                'HEURISTICS: CALCULATING_SENTIMENT'
+            ];
+            let msgIndex = 0;
+            let currentProgress = 30;
+            
+            tickerInterval = setInterval(() => {
+                if (currentProgress < 90) {
+                    currentProgress += 1;
+                    const label = statusMessages[msgIndex % statusMessages.length];
+                    updateProgress(currentProgress, label);
+                    if (currentProgress % 10 === 0) msgIndex++;
+                }
+            }, 1200); // Pulse every 1.2s to show life
 
             const response = await fetch('/api/document-analyze', {
                 method: 'POST',
@@ -69,21 +93,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             });
 
+            clearInterval(tickerInterval);
+
             if (!response.ok) throw new Error('API_PROCESS_FAILED');
 
-            updateProgress(85, 'SEMANTIC_ANALYSIS...');
             const data = await response.json();
             
             const endTime = performance.now();
             latencyValue.innerText = `${Math.round(endTime - startTime)}ms`;
 
-            updateProgress(100, 'REPORT_GENERATED');
+            updateProgress(100, 'COMPLETED: REPORT_GENERATED');
             setTimeout(() => {
                 displayResults(data);
                 processingIndicator.classList.add('hidden');
             }, 400);
 
         } catch (error) {
+            if (tickerInterval) clearInterval(tickerInterval);
             alert(`ERR: ${error.message}`);
             resetUI();
         }
