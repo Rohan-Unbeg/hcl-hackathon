@@ -38,6 +38,7 @@ app.add_middleware(
 )
 
 # API Routes
+logger.info("Registering API routes under /api prefix")
 app.include_router(api_router, prefix="/api")
 
 
