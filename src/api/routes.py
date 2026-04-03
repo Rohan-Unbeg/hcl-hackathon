@@ -47,6 +47,7 @@ def background_processing_task(task_id: str, file_name: str, file_type: str, fil
         processing_results[task_id] = {"status": "error", "message": str(e)}
 
 @router.post("/document-analyze", response_model=DocumentResponse)
+@router.post("/document-analyzer", response_model=DocumentResponse)
 async def analyze_document(
     request: DocumentRequest, 
     background_tasks: BackgroundTasks,

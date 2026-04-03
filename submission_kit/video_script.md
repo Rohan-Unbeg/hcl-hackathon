@@ -1,31 +1,20 @@
-# Video Demo Script - DocIntel v2.1
+# DocIntel Demo (Simple & Fast)
 
-**Total Duration**: 120-180 Seconds
-**Role**: Technical Lead / Developer
-
----
-
-### 1. Introduction (0:00 - 0:30)
-*   **Visual**: Show the DocIntel Dashboard (Dark Mode UI).
-*   **Audio**: "Hi, I'm Rohan. Today I'm presenting DocIntel—a production-grade AI Document Extraction engine built for the GUVI 2026 Hackathon. Unlike basic wrappers, DocIntel is a decoupled, scalable system designed for high-precision extraction from PDF, DOCX, and Image formats."
-
-### 2. The Dashboard & Core Features (0:30 - 1:15)
-*   **Visual**: Drag and drop `sample1.pdf` into the "INGESTION_ZONE".
-*   **Audio**: "Our dashboard emphasizes developer experience. When a file is uploaded, it enters our ingestion layer. Notice the real-time feedback as the system processes. In under 5 seconds, we have a full extraction: AI-powered summary, Categorized Entities, and Sentiment Analysis."
-*   **Visual**: Zoom in on the "Entity Map" (Organization tags like Google, Microsoft).
-*   **Audio**: "We don't just extract text; we understand it. Our engine maps organizations, names, and monetary values into structured JSON records."
-
-### 3. Deep Extraction Strategy (1:15 - 1:45)
-*   **Visual**: Switch to VS Code, show `src/core/extractor.py`.
-*   **Audio**: "Technically, we utilize a multi-layer pipeline. We use PyMuPDF for structural PDF parsing and Tesseract 5.0 for OCR on images. For OCR, we implemented custom grayscale and contrast pre-processing to handle noisy scans, which significantly improved accuracy for the hackathon's image test cases."
-
-### 4. Scalability & AI Stack (1:45 - 2:30)
-*   **Visual**: Show VS Code `src/api/routes.py` and the `BackgroundTasks` implementation.
-*   **Audio**: "To ensure production scalability, we've designed a hybrid architecture. For our live free-tier deployment, we use FastAPI's native BackgroundTasks. However, the system is fully Celery-integrated, allowing us to drop in a Redis broker and scale to thousands of documents per minute without changing a line of core logic."
-
-### 5. Conclusion & Compliance (2:30 - 3:00)
-*   **Visual**: Show the README "AI Tools Used" section and finally the "Test Successful" badge.
-*   **Audio**: "Documentation is complete with full AI tool disclosure and architectural deep-dives. DocIntel is live, Docker-ready, and fully verified for all 15 test cases. Thank you for your time."
+**Time**: 45 - 60 Seconds
 
 ---
-*Note: Record this using OBS or a similar tool. Ensure your audio is clear and the dark-mode UI is vibrant.*
+
+### Step 1: Start (0:00)
+*   **Show**: The Dashboard.
+*   **Say**: "Hey guys, this is DocIntel. It’s a tool I made to automatically read and summarize documents so you don't have to."
+
+### Step 2: The Demo (0:10)
+*   **Show**: Dragging an image or PDF into the box.
+*   **Say**: "I'll drop this resume in. You can see it's reading the file and then the AI starts analyzing it. It takes a few seconds because it's actually 'reading' the image layout."
+
+### Step 3: The Result (0:30)
+*   **Show**: The results appearing.
+*   **Say**: "And we’re done. It got the person's name, their company, a quick summary, and it even figured out the sentiment. It works for PDFs, Word docs, and photos."
+
+### Step 4: Wrap up (0:50)
+*   **Say**: "It's all live on Render and the code is on GitHub. Thanks for watching!"
